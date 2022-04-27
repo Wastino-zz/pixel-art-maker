@@ -4,28 +4,32 @@ var color;
 
 $('#sizePicker').submit( function (event){
     event.preventDefault();
-     width = $('inputWidth').val();
-     height = $('inputHeight').val();
+    width = $('#inputWidth').val();
+    height = $('#inputHeight').val();
+
+    $('#pixelCanvas').html('');
+
     makeGrid(height, width);
+    colorListener();
 });
 
 function makeGrid(h, w) {
-    for(let i = 0; i < h; i++) {
-        $('pixelCanvas').append('<tr></tr>');
+    for(var i = 1; i < h; i++) {
+        $('#pixelCanvas').append('<tr></tr>');
     };
-    for(let i = 0; i < w; i++) {
+    for(var i = 1; i < w; i++) {
         $('tr').append('<td></td>');
     };
 };
 
-function addCellClickListener() {
-    $('td').click( event => {
-        var color = $('colorPicker').val();
-        if($(this).attr('css'))
+function colorListener() {
+    $('td').click( function (event) {
+        color = $('#colorPicker').val();
+        if($(this).attr('style'))
       {
-        $(this).removeAttr('css');
+        $(this).removeAttr('style');
       }
     else
-      $(this).css('background-color', color);
+      $(this).attr('style', 'background-color:'+color);
     });
 };
